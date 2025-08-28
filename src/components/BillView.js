@@ -40,7 +40,9 @@ const BillView = () => {
   const loadBill = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/bills/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/bills/${id}`, {
+        withCredentials: true
+      });
       setBill(response.data);
     } catch (error) {
       setAlert({

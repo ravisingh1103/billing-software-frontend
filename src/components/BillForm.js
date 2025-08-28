@@ -102,7 +102,9 @@ const BillForm = () => {
 
   const loadBill = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/bills/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/bills/${id}`, {
+        withCredentials: true
+      });
       const bill = response.data;
       setFormData({
         ...bill,
@@ -117,7 +119,9 @@ const BillForm = () => {
 
   const loadPredefinedItems = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/predefined-items`);
+      const response = await axios.get(`${API_BASE_URL}/predefined-items`, {
+        withCredentials: true
+      });
       setPredefinedItems(response.data);
     } catch (error) {
       console.error('Error loading predefined items:', error);
@@ -228,7 +232,9 @@ const BillForm = () => {
 
     // Get amount in words
     if (total_amount > 0) {
-      axios.get(`${API_BASE_URL}/number-to-words/${total_amount}`)
+      axios.get(`${API_BASE_URL}/number-to-words/${total_amount}`, {
+        withCredentials: true
+      })
         .then(response => {
           setTotals(prev => ({ ...prev, amount_in_words: response.data.words }));
         })
@@ -256,10 +262,14 @@ const BillForm = () => {
 
     try {
       if (isEditing) {
-        await axios.put(`${API_BASE_URL}/bills/${id}`, billData);
+        await axios.put(`${API_BASE_URL}/bills/${id}`, billData, {
+          withCredentials: true
+        });
         showAlert('Bill updated successfully');
       } else {
-        await axios.post(`${API_BASE_URL}/bills`, billData);
+        await axios.post(`${API_BASE_URL}/bills`, billData, {
+          withCredentials: true
+        });
         showAlert('Bill created successfully');
       }
       setTimeout(() => navigate('/bills'), 2000);

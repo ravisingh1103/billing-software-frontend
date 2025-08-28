@@ -50,7 +50,9 @@ const ItemManager = ({ open, onClose, onItemSaved }) => {
 
   const loadItems = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/predefined-items`);
+      const response = await axios.get(`${API_BASE_URL}/predefined-items`, {
+        withCredentials: true
+      });
       setItems(response.data);
     } catch (error) {
       showAlert('Error loading items', 'error');
@@ -68,7 +70,9 @@ const ItemManager = ({ open, onClose, onItemSaved }) => {
     }
 
     try {
-      await axios.post(`${API_BASE_URL}/predefined-items`, newItem);
+      await axios.post(`${API_BASE_URL}/predefined-items`, newItem, {
+        withCredentials: true
+      });
       showAlert('Item added successfully');
       setNewItem({
         name: '',
@@ -91,7 +95,9 @@ const ItemManager = ({ open, onClose, onItemSaved }) => {
     }
 
     try {
-      await axios.put(`${API_BASE_URL}/predefined-items/${editingItem.id}`, editingItem);
+      await axios.put(`${API_BASE_URL}/predefined-items/${editingItem.id}`, editingItem, {
+        withCredentials: true
+      });
       showAlert('Item updated successfully');
       setEditingItem(null);
       loadItems();
@@ -107,7 +113,9 @@ const ItemManager = ({ open, onClose, onItemSaved }) => {
     }
 
     try {
-      await axios.delete(`${API_BASE_URL}/predefined-items/${itemId}`);
+      await axios.delete(`${API_BASE_URL}/predefined-items/${itemId}`, {
+        withCredentials: true
+      });
       showAlert('Item deleted successfully');
       loadItems();
       if (onItemSaved) onItemSaved();
