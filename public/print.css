@@ -1,0 +1,72 @@
+/* Print-only stylesheet to override browser defaults */
+@media print {
+  /* Remove browser headers and footers */
+  @page {
+    margin: 0.5in;
+    size: A4;
+    /* Remove header and footer */
+    @top-left { content: ""; }
+    @top-center { content: ""; }
+    @top-right { content: ""; }
+    @bottom-left { content: ""; }
+    @bottom-center { content: ""; }
+    @bottom-right { content: ""; }
+  }
+  
+  /* Hide everything except the bill content */
+  body * {
+    visibility: hidden;
+  }
+  
+  .print-content, .print-content * {
+    visibility: visible;
+  }
+  
+  .print-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white;
+    overflow: visible !important;
+  }
+  
+  /* Ensure clean printing - NO SCROLLBARS */
+  html, body {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Remove ALL scrollbars and overflow restrictions */
+  * {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    scrollbar-width: none !important;
+  }
+  
+  /* Remove webkit scrollbars */
+  *::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    background: transparent !important;
+  }
+  
+  /* Force Material-UI components to not scroll */
+  .MuiTableContainer-root,
+  .MuiBox-root,
+  .MuiPaper-root,
+  .MuiContainer-root {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+  }
+  
+  /* Force tables to be fully visible */
+  table, tbody, thead, tr, td, th {
+    overflow: visible !important;
+    page-break-inside: avoid;
+  }
+}
